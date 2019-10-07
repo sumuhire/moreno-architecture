@@ -1,0 +1,225 @@
+<div class="wrapper">
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-content sticky-top">
+            <a class="sidebar-brand text-center bg-white" href="{{path('index')}}">
+
+                <img alt="Image" src="{{ asset('assets/img/logo/m.png') }}" class="avatar avatar-lg" />
+            </a>
+
+            <div style="height:100%;box-shadow: 0 0 3px 0 rgba(189, 187, 187, 0.38);">
+                <div class="sidebar-user flex-column text-center" id="user-desktop" style="width:100%"
+                    data-zanim-trigger="scroll" data-zanim-xs='{"animation":"zoom-out","delay":0}'>
+                    <div>
+                        <a href="">
+                            <img alt="Image" src="{{ asset('assets/img/avatar-male-4.jpg') }}" class="avatar" />
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center text-center pt-3" style='width:100%'>
+                        <a href="">
+                            <h6 style='letter-spacing: 0.05em;font-weight:500;margin:0'>
+                                Moreno</h6>
+                            <h6 style='letter-spacing: 0.05em;font-weight:500;margin:0'>
+                                Architecure et Associé &nbsp</h6>
+
+                        </a>
+                        <div class="dropdown">
+                            <a classs='h3' href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" style='margin:0'>
+                                <!-- Get image user image from folders -->
+                                <i class="fal fa-angle-down" style='font-size:1.5em;padding-top:6px'></i>
+                            </a>
+
+                            <!-- Update links -->
+                            <div class="dropdown-menu dropdown-menu-left">
+                                <a href="" class="dropdown-item">Profile</a>
+                                <a href="{{ path('logout') }}" class="dropdown-item">Sign
+                                    out<span class="d-inline-block" style='color:#fd7e14'>&xrarr;</span></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="flex-column px-3" id="navbar-collapse">
+                    <ul class="navbar navbar-nav d-lg-block">
+
+                        <hr>
+                        <li class="nav-item" style='border-left: 2px solid #fd7e14'>
+
+                            <a class="nav-side" href="{{path('dashboard')}}" style="font-weight:500;">Tableau de
+                                bord</a>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-side" href="">Acceuil</a>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-side" href="">Projets</a>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-side" href="">Projet</a>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-side" href="">L'agence</a>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-side" href="">Jobs</a>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-side" href="">Employés</a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a class="nav-side" href="{{ path('logout') }}">Sign out<span class="d-inline-block"
+                                    style='color:#fd7e14'>&xrarr;</span></a>
+
+                        </li>
+
+                        <hr>
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+    </nav>
+
+
+
+
+    {# <div class="layout layout-nav-side">
+    <div class="navbar navbar-expand-lg bg-light navbar-dark sticky-top">
+
+        <div class="flex-column text-center" id="user-desktop" style="width:100%" data-zanim-trigger="scroll"
+            data-zanim-xs='{"animation":"zoom-out","delay":0}'>
+            <div>
+                <a href="{{ path("index") }}">
+                    <img alt="Image" src="{{ asset('assets/img/logo/m.png') }}" class="avatar avatar-lg" />
+                </a>
+            </div>
+            <div class="d-flex align-items-center justify-content-center text-center" style='width:100%'>
+                <a href="">
+                    <h6 style='letter-spacing: 0.05em;font-weight:500;margin:0'>Moreno Architecure et Associé</h6>
+                </a>
+                <div class="dropdown">
+                    <a classs='h3' href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" style='margin:0'>
+                        <!-- Get image user image from folders -->
+                        <i class="fal fa-angle-down" style='font-size:1.5em;padding-top:6px'></i>
+                    </a>
+
+                    <!-- Update links -->
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="{{ path("index") }}" class="dropdown-item">Moreno</a>
+                        <a href="{{ path('logout') }}" class="dropdown-item">logout
+                            <span class="d-inline-block">&xrarr;</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex-column text-center" id="logo-mobile-bar" data-zanim-trigger="scroll"
+            data-zanim-xs='{"animation":"zoom-out","delay":0}'>
+            <div class="text-center">
+                <img alt="nimble" class=" img-fluid" src="{{ asset('assets/img/logo/m.png') }}" width="70"
+                    data-zanim-trigger="scroll" data-zanim-xs='{"animation":"zoom-out","delay":0}'
+                    style="max-width:50%" />
+            </div>
+
+        </div>
+
+        <div class="d-flex align-items-center">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+                aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-block d-lg-none ml-2">
+                <div class="dropdown">
+                    <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img alt="Image" src="{{ asset('assets/img/avatar-male-4.jpg') }}" class="avatar" />
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="{{ path("index") }}" class="dropdown-item">Moreno</a>
+                        <a href="{{ path('logout') }}" class="dropdown-item">logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse flex-column" id="navbar-collapse">
+            <ul class="navbar-nav d-lg-block">
+
+                <li class="d-none d-lg-block nav-item">
+
+                    <a class="nav-link"></a>
+
+                </li>
+
+                <li class="d-none d-lg-block nav-item">
+
+                    <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2"
+                        aria-controls="submenu-2"></a>
+
+
+                </li>
+
+                <li class="d-none d-lg-block nav-item">
+
+                    <a class="nav-link"></a>
+
+
+                </li>
+                <hr style='color:#0B2E2D!important'>
+                <li class="nav-item mb-3" style='border-left: 2px solid #fd7e14'>
+
+                    <a class="nav-side text-muted" href="">Account</a>
+
+                </li>
+
+                <li class="nav-item">
+
+
+
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-side text-muted" href="{{ path('logout')}}">Sign out<span class="d-inline-block"
+                            style='color:#fd7e14'>&xrarr;</span></a>
+
+                </li>
+
+
+
+
+            </ul>
+
+        </div>
+
+        <div class="d-none d-lg-block text-center" style='width:100%'>
+            <div class="dropup">
+                <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <img alt="Image" src="{{ asset('assets/img/avatar-male-4.jpg') }}" class="avatar" />
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="{{ path("index") }}" class="dropdown-item">Moreno</a>
+                    <a href="{{ path('logout') }}" class="dropdown-item">logout</a>
+                </div>
+            </div>
+        </div>
+    </div> --> #}

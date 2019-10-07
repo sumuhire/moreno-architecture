@@ -10,6 +10,8 @@ parameters:
     mailer_user: ineedhelp.wf3@gmail.com
     mailer_password: Webforce3
     picture_directory: '%kernel.project_dir%/public/uploads/picture'
+    projects_directory: '%kernel.project_dir%/public/assets/img/projects'
+    employees_directory: '%kernel.project_dir%/public/assets/img/employees'
 
 services:
     # default configuration for services in *this* file

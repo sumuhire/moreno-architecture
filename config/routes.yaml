@@ -2,43 +2,60 @@
 
 # DefaultController Routes
 
-inscription:
-  path: /inscription
-  controller: App\Controller\DefaultController::inscription
-
 index:
   path:     /
   controller: App\Controller\DefaultController::index
 
-dossier:
-  path:     /dossier
-  controller: App\Controller\DefaultController::dossier
 
-dossiers:
-  path:     /dossiers
-  controller: App\Controller\DefaultController::dossiers
+projects:
+  path:     /projects
+  controller: App\Controller\DefaultController::projects
 
-produit:
-  path:     /produit
-  controller: App\Controller\DefaultController::produit
+
+project:
+  path:     /project
+  controller: App\Controller\DefaultController::project
 
 press:
   path:     /press
   controller: App\Controller\DefaultController::pressMenu
 
-about:
-  path:     /about
-  controller: App\Controller\DefaultController::about
+agency:
+  path:     /agency
+  controller: App\Controller\DefaultController::agency
 
-panier:
-  path:     /panier
-  controller: App\Controller\DefaultController::panier
-
-commande:
-  path:     /commande
-  controller: App\Controller\DefaultController::commande
+login:
+  path:     /login
+  controller: App\Controller\DefaultController::login
 
 logout:
   path: /logout
 
+contact:
+  path:     /contact
+  controller: App\Controller\DefaultController::contact
 
+jobs:
+  path:     /jobs
+  controller: App\Controller\DefaultController::jobs
+
+employee:
+  path:     /employee
+  controller: App\Controller\DefaultController::employee
+
+
+dashboard:
+  path:     /dashboard
+  controller: App\Controller\DefaultController::dashboard
+
+acceuil:
+  path:     /dashboard/acceuil
+  controller: App\Controller\DefaultController::acceuil
+
+projectEdit:
+  path:     /dashboard/project/{id}
+  controller: App\Controller\DefaultController::projectEdit
+
+categoryEdit:
+  path:     /dashboard/category/{id}
+  controller: App\Controller\DefaultController::categoryEdit

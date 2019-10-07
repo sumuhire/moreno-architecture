@@ -1,0 +1,389 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nimble{% endblock %}
+
+{% block header %}
+
+{% include 'App/headerSide.html.twig' %}
+
+{% endblock %}
+
+{% block body %}
+
+{% include 'App/subHeader.html.twig' %}
+
+{# nav tabs #}
+
+<ul class="nav pt-2">
+
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" id="categories-tab" href="#categories" role="tab"
+      aria-controls="categories" aria-selected="true">
+      Categories
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" id="projects-tab" href="#projects" role="tab" aria-controls="projects"
+      aria-selected="true">
+      Projects
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" id="employees-tab" href="#employees" role="tab" aria-controls="employees"
+      aria-selected="true">
+      Employees
+    </a>
+  </li>
+</ul>
+
+<hr style='margin-top: -1rem;'>
+
+<div class="tab-content">
+
+  <div class="tab-pane fade active show" id="categories" role="tabpanel" aria-labelledby="categories">
+    <div class="content-list" data-filter-list="content-list-body">
+      <div class="row content-list-head">
+        <div class="card-list-head d-flex justify-content-between mb-3" style="width:100%">
+          <div class="d-flex align-items-center ">
+            <form class="col-md-auto">
+              <div class="input-group input-group-round">
+                <div class="input-group-prepend" style='height:35px!important;'>
+                  <span class="input-group-text bg-white" style="height:35px">
+                    <i class="material-icons mr-2">filter_list</i>
+                  </span>
+                </div>
+                <input type="search" class="form-control filter-list-input bg-white" placeholder="Filter"
+                  aria-label="Filter notes" style='height:35px!important;
+    border-left: none;'>
+              </div>
+            </form>
+
+          </div>
+          <div class="d-flex align-items-center">
+            <a class='text-secondary wiggle' id="category_form" alt='create category' data-toggle="modal"
+              data-target="#category_form_modal" title="Create project" href=''>
+
+              <i class="fas fa-plus-square h3 text-secondary"></i>
+
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="content-list-body row">
+
+        {% for category in categories %}
+        <div class="col-md-6 pt-3" data-toggle="tooltip" title="{{ category.label | capitalize }}">
+
+          {# Item #}
+          <a href="{{ path('acceuil') }}" target="_blank" class="card border-0 mb-3 mb-md-0"
+            style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
+
+            {# Image #}
+            <div class="card-img-top overflow-hidden">
+              <div class="bg-overlay overflow-hidden">
+
+              </div>
+              <p class='invisible' data-filter-by="text">{{ category.label | capitalize }}</p>
+              <img src="assets/img/app/m-page.png" alt="bbc" class="img-fluid"
+                data-zanim-xs='{"delay":0.1,"animation":"zoom-in"}'>
+            </div>
+
+
+          </a> {# / .card #}
+
+        </div>
+        {% endfor %}
+        <div class="modal fade" id="category_form_modal" tabindex="-1" role="dialog"
+          aria-labelledby="category_form_modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <i class="fas fa-times" data-dismiss="modal"></i>
+              </div>
+              <div class="modal-body">
+                <div class="form-group mb-0">
+                  <div class="row no-gutters py-4">
+
+                    <div class="col">
+
+
+                      {{ form(categoryForm)}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projects">
+    <div class="content-list" data-filter-list="content-list-body">
+      <div class="row content-list-head">
+        <div class="card-list-head d-flex justify-content-between mb-3" style="width:100%">
+          <div class="d-flex align-items-center ">
+            <form class="col-md-auto">
+              <div class="input-group input-group-round">
+                <div class="input-group-prepend" style='height:35px!important;'>
+                  <span class="input-group-text bg-white" style="height:35px">
+                    <i class="material-icons mr-2">filter_list</i>
+                  </span>
+                </div>
+                <input type="search" class="form-control filter-list-input bg-white" placeholder="Filter"
+                  aria-label="Filter notes" style='height:35px!important;'>
+              </div>
+            </form>
+
+          </div>
+          <div class="d-flex align-items-center">
+            <a class='text-secondary wiggle' id="project_form" alt='Invite Graduates' data-toggle="modal"
+              data-target="#project_form_modal" title="Create project" href=''>
+
+              <i class="fas fa-plus-square h3 text-secondary"></i>
+
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="content-list-body row">
+
+        {% for project in projects %}
+        <div class="col-md-6 pt-3" data-toggle="tooltip" title="{{ project.label | capitalize }}">
+
+          {# Item #}
+          <a href="" target="_blank" class="card border-0 mb-3 mb-md-0"
+            style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
+            <div class="card card-team">
+              {# Image #}
+              <div class="card-body overflow-hidden" data-filter-by="text">
+                <div class="dropdown card-options">
+                  <img class="img-dashboard" data-filter-by="alt"
+                    src="{{ asset('assets/img/projects/' ~ project.photo1) }} " />
+                </div>
+                <div class="card-title">
+                  <h5 class="font-weight-bold" data-filter-by="text">{{ project.label | capitalize }}</h5>
+                  <h6 data-filter-by="text">
+                    {% if project.intro|length > 40 %}
+                    {% set introduction = project.intro|slice(0, 40) %}
+                    {% set introduction  = introduction ~ '...' %}
+                    {% else %}
+                    {% set introduction  = project.intro %}
+                    {% endif %}
+                    {{ introduction | capitalize }}</h6>
+                </div>
+              </div>
+            </div>
+
+          </a> {# / .card #}
+
+        </div>
+        {% endfor %}
+        <div class="modal fade" id="project_form_modal" tabindex="-1" role="dialog"
+          aria-labelledby="project_form_modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <i class="fas fa-times" data-dismiss="modal"></i>
+              </div>
+              <div class="modal-body">
+                <div class="form-group mb-0">
+                  <div class="row no-gutters py-4">
+
+                    <div class="col">
+
+
+                      {{ form(projectForm)}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="tab-pane fade" id="employees" role="tabpanel" aria-labelledby="employees">
+    <div class="content-list" data-filter-list="content-list-body">
+      <div class="row content-list-head">
+        <div class="card-list-head d-flex justify-content-between mb-3" style="width:100%">
+          <div class="d-flex align-items-center ">
+            <form class="col-md-auto">
+              <div class="input-group input-group-round">
+                <div class="input-group-prepend" style='height:35px!important;'>
+                  <span class="input-group-text bg-white" style="height:35px">
+                    <i class="material-icons mr-2">filter_list</i>
+                  </span>
+                </div>
+                <input type="search" class="form-control filter-list-input bg-white" placeholder="Filter"
+                  aria-label="Filter notes" style='height:35px!important;'>
+              </div>
+            </form>
+
+          </div>
+          <div class="d-flex align-items-center">
+            <a class='text-secondary wiggle' id="employee_form" alt='Invite Graduates' data-toggle="modal"
+              data-target="#employee_form_modal" title="Create employee" href=''>
+
+              <i class="fas fa-plus-square h3 text-secondary"></i>
+
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="content-list-body row">
+
+        {% for employee in employees %}
+        <div class="col-md-6 pt-3" data-toggle="tooltip"
+          title="{{ employee.firstname | capitalize }}{{ employee.lastname | capitalize }}">
+
+          {# Item #}
+          <a href="" target="_blank" class="card border-0 mb-3 mb-md-0"
+            style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
+            <div class="card card-team">
+              {# Image #}
+              <div class="card-body overflow-hidden" data-filter-by="text">
+                <div class="dropdown card-options">
+                  {# <img class="img-dashboard" data-filter-by="alt"
+                    src="{{ asset('assets/img/employees/' ~ employee.photo1) }} " /> #}
+                </div>
+                <div class="card-title">
+                  <h5 class="font-weight-bold" data-filter-by="text">
+                    {{ employee.firstname | capitalize }}{{ employee.lastname | capitalize }}</h5>
+                  <h6 data-filter-by="text">
+                    {% if employee.intro|length > 40 %}
+                    {% set introduction = employee.intro|slice(0, 40) %}
+                    {% set introduction  = introduction ~ '...' %}
+                    {% else %}
+                    {% set introduction  = employee.intro %}
+                    {% endif %}
+                    {{ introduction | capitalize }}</h6>
+                </div>
+              </div>
+            </div>
+
+          </a> {# / .card #}
+
+        </div>
+        {% endfor %}
+        <div class="modal fade" id="employee_form_modal" tabindex="-1" role="dialog"
+          aria-labelledby="employee_form_modal">
+          <ul class="nav pt-2">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" id="general-tab" href="#general" role="tab"
+                aria-controls="general" aria-selected="true">
+                General
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" id="experiences-tab" href="#experiences" role="tab"
+                aria-controls="experiences" aria-selected="true">
+                Education & Experiences
+              </a>
+            </li>
+          </ul>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <i class="fas fa-times" data-dismiss="modal"></i>
+                <ul class="nav pt-2">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" id="general-tab" href="#general" role="tab"
+                      aria-controls="general" aria-selected="true">
+                      General
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" id="experiences-tab" href="#experiences" role="tab"
+                      aria-controls="experiences" aria-selected="true">
+                      Education & Experiences
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+
+                <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+                          {{ form_start(employeeForm) }}
+                          {{ form_row(employeeForm.firstname) }}
+                          {{ form_row(employeeForm.lastname) }}
+                          {{ form_row(employeeForm.intro) }}
+                          {{ form_row(employeeForm.phoneNumber) }}
+                          {{ form_row(employeeForm.job) }}
+                          {{ form_row(employeeForm.phoneNumber) }}
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="experiences" role="tabpanel" aria-labelledby="experiences">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+
+
+                          <div class='col-sm-12 col-sm-offset-2' id='education_list'
+                            data-prototype='{{ form_widget(employeeForm.education.vars.prototype)|e("html_attr") }}'>
+                            {% for row in employeeForm.education %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(employeeForm.education) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                                {# {{ form_row(degreeTypeForm.delete) }} #}
+                              </div>
+                            </div>
+                            {% endfor %}
+
+
+                          </div>
+
+                          {{ form_end(employeeForm) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
+    </div>
+
+    {% endblock %}
+
+    {% block footer %}
+
+    {% endblock %}

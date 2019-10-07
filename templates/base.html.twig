@@ -1,89 +1,110 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
-        
-        <title>Le comptoir de la santé</title>
-        
-        {# meta #}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <meta name="description" content="Le comptoir de la santé">
-        <meta name="msapplication-config" content="{{ asset('assets/ico/browserconfig.xml')}}">
-        <meta name="theme-color" content="#ffffff">
+<head>
 
-        {% block stylesheets %}
+    <title>Moreno Architecture</title>
 
-        {# CDN - Font, Icons, .. #}
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {# Meta #}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="steve umuhire">
+    <meta name="msapplication-config" content="{{ asset('assets/img/favicons/mstile-150x150.png')}}">
+    <meta name="theme-color" content="#ffffff">
 
-        {# Favicon #}
-        <link rel="manifest" href="{{ asset('assets/ico/manifest.json')}}">
-        <link rel="shortcut icon" href="{{ asset('assets/ico/comptoir-logo.png')}}">
+    {% block stylesheets %}
 
-        {# CSS Plugins #}
-        <link rel="stylesheet" href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/lightbox/css/lightbox.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/flickity/flickity.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/carousel/css/owl.carousel.css')}}">
-        
+    {# Favicons #}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/logo/m.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logo/m.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/logo/m.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo/m.png')}}">
+    <link rel="manifest" href="{{ asset('assets/img/favicons/manifest.json')}}">
 
-        {# CSS Global #}
-        <link href="{{ asset('assets/css/theme.min.css') }}" rel="stylesheet" type="text/css" media="all" />
-        
-        {% endblock %}
-    
-    </head>
+    {# lib #}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{ asset('assets/lib/loaders.css/loaders.min.css')}}" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=PT+Mono%7cPT+Serif:400,400i%7ccentury gothic:100,300,400,700,800,900"
+        rel="stylesheet">
+    <link href="{{ asset('assets/lib/remodal/remodal.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/remodal/remodal-default-theme.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/owl.carousel/owl.carousel.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/lightbox2/css/lightbox.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/semantic-ui-accordion/accordion.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/lib/semantic-ui-transition/transition.min.css')}}" rel="stylesheet">
 
 
-    <body>
-        {% block header %}
+    {# CSS Global #}
+    <link href="{{ asset('assets/css/theme.css') }}" rel="stylesheet" type="text/css" media="all" />
 
-            {% include 'header.html.twig' %}
-           
-        {% endblock %}
-        
-        {% block body %}
-        
-        {% endblock %}
+    {# Google API - maps #}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARdVcREeBK44lIWnv5-iPijKqvlSAVwbw&callback=initMap"
+        async defer></script>
 
-        {% block footer %}
+    {% endblock %}
 
-            {% include 'footer.html.twig' %}
-            
-	    {% endblock %}
-        
-        {% block javascripts %}
+</head>
 
-        {# Google API - maps #}
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC909s23g2XEIj1DCk5bWKvrice8hkbxNM&callback=initMap" type="text/javascript"></script>
 
-        {# JS Global #}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<body class="overflow-hidden-x">
+    {% block header %}
 
-        {# JS Plugins #}
-        <script src="{{ asset('assets/plugins/parallax/parallax.min.js')}}"></script>
-        <script src="{{ asset('assets/plugins/isotope/lib/imagesloaded.pkgd.min.js')}}"></script>
-        <script src="{{ asset('assets/plugins/isotope/isotope.pkgd.min.js')}}"></script>
-        <script src="{{ asset('assets/plugins/flickity/flickity.pkgd.min.js')}}"></script>
-        <script src="{{ asset('assets/plugins/lightbox/js/lightbox.min.js')}}"></script>
-        <script src="{{ asset('assets/plugins/reservation/reservation.js')}}"></script>
-        <script src="{{ asset('assets/plugins/alerts/alerts.js')}}"></script>
-        <script src="{{ asset('assets/plugins/slider/slider.js')}}"></script>
-        <script src="{{ asset('assets/plugins/carousel/js/owl.carousel.js')}}"></script>
-        
-        {# JS global #}
-        <script src="{{ asset('assets/js/theme.js')}}"></script>
+    {% include 'header.html.twig' %}
 
-        {# JS Custom #}
-        <script src="{{ asset('assets/js/custom.js')}}"></script>
+    {% endblock %}
 
-        {% endblock %}
+    {% block body %}
 
-    </body>
+
+    {% endblock %}
+
+    {% block footer %}
+
+    {% include 'footer.html.twig' %}
+
+    {% endblock %}
+
+    {% block javascripts %}
+
+
+
+    {# Jquery #}
+    <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
+
+    {# JS Lib #}
+    <script src="{{ asset('assets/lib/loaders.css/loaders.css.js')}}"></script>
+    <script src="{{ asset('assets/lib/remodal/remodal.js')}}"></script>
+    <script src="{{ asset('assets/lib/owl.carousel/owl.carousel.js')}}"></script>
+    <script src="{{ asset('assets/lib/lightbox2/js/lightbox.js')}}"></script>
+    <script src="{{ asset('assets/lib/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{ asset('assets/lib/isotope-packery/packery-mode.pkgd.min.js')}}"></script>
+
+    {# JS Plugins #}
+    <script src="{{ asset('assets/js/list.min.js') }}"></script>
+    <script src="{{ asset('assets/js/autosize.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js')}}"></script>
+    <script src="{{ asset('assets/js/bootstrap.js')}}"></script>
+    <script src="{{ asset('assets/js/stickyfill.min.js')}}"></script>
+    <script src="{{ asset('assets/js/rellax.min.js')}}"></script>
+    <script src="{{ asset('assets/js/progressbar.min.js')}}"></script>
+    <script src="{{ asset('assets/js/imagesloaded.pkgd.js')}}"></script>
+    <script src="{{ asset('assets/js/CustomEase.js')}}"></script>
+    <script src="{{ asset('assets/js/DrawSVGPlugin.js')}}"></script>
+    <script src="{{ asset('assets/js/fontawesome-all.js')}}"></script>
+    <script src="{{ asset('assets/js/ScrollToPlugin.js')}}"></script>
+    <script src="{{ asset('assets/js/TweenMax.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.countdown.min.js')}}"></script>
+    <script src="{{ asset('assets/js/map.js')}}"></script>
+    <script src="{{ asset('assets/lib/semantic-ui-accordion/accordion.min.js')}}"></script>
+    <script src="{{ asset('assets/lib/semantic-ui-transition/transition.min.js')}}"></script>
+
+    {# JS global #}
+    <script src="{{ asset('assets/js/theme.js')}}"></script>
+
+
+    {% endblock %}
+
+</body>
 
 </html>
-
-
