@@ -3253,3 +3253,194 @@ function addRemoveButton($panel) {
   $panel.append($panelFooter);
 
 }
+
+let $collectionHolderI;
+
+let $addNewProfil = $('<a href="#" class="btn btn-info"> Add new degree title</a>');
+
+$(document).ready(function () {
+  //get the div collectionHolderI;
+  $collectionHolderI = $('#profils_list');
+
+  //Append the add new title to the collectionHolderI
+  $collectionHolderI.append($addNewProfil);
+
+  //Handle click event
+  $addNewProfil.click(function (e) {
+    e.preventDefault();
+    //create a new form & append it 
+    addNewForm();
+  });
+
+  //create index
+  $collectionHolderI.data('index', $collectionHolderI.find('.panel').length);
+
+  //Remove button
+  $collectionHolderI.find('.panel').each(function () {
+    addRemoveButton($(this));
+  })
+
+})
+
+/**
+ * Callback functions
+ */
+
+//Add
+
+function addNewForm() {
+
+  //Getting the prototype
+  let prototype = $collectionHolderI.data('prototype');
+
+  //get the index
+  let index = $collectionHolderI.data('index');
+
+  //create the form
+  let newForm = prototype;
+
+  newForm = newForm.replace(/__name__/g, index);
+
+  //increment the index
+  $collectionHolder.data('index', index + 1);
+
+  //create the panel
+
+  let $panel = $('<div class="panel-heading"></div>');
+
+  //create the panel body & append the form to it
+
+  let $panelBody = $('<div class="panel-body"></div>').append(newForm);
+
+  //append the panel-body to the panel
+  $panel.append($panelBody);
+
+  //Append the removeButton to the new panel
+  addRemoveButton($panel);
+
+  //Append the panel to the addNewProfil
+  $addNewProfil.before($panel);
+};
+
+
+//Remove
+
+function addRemoveButton($panel) {
+
+  //create remove button
+  let $removeButton = $('<a href="#" class="btn btn-danger"> Remove</a>');
+
+  //appending the remove button to the panel footer
+  let $panelFooter = $('<div class="panel-footer"></div>').append($removeButton)
+
+  //Handle click event
+
+  $removeButton.click(function (e) {
+    e.preventDefault();
+    $(e.target).parents('.panel').slideUp(1000, function () {
+      $(this).remove();
+    });
+
+  });
+
+  //append the footer to the panel
+
+  $panel.append($panelFooter);
+
+}
+
+
+let $collectionHolderII;
+
+let $addNewMission = $('<a href="#" class="btn btn-info"> Add new degree title</a>');
+
+$(document).ready(function () {
+  //get the div collectionHolderII;
+  $collectionHolderII = $('#missions_list');
+
+  //Append the add new title to the collectionHolderII
+  $collectionHolderII.append($addNewMission);
+
+  //Handle click event
+  $addNewMission.click(function (e) {
+    e.preventDefault();
+    //create a new form & append it 
+    addNewForm();
+  });
+
+  //create index
+  $collectionHolderII.data('index', $collectionHolderII.find('.panel').length);
+
+  //Remove button
+  $collectionHolderII.find('.panel').each(function () {
+    addRemoveButton($(this));
+  })
+
+})
+
+/**
+ * Callback functions
+ */
+
+//Add
+
+function addNewForm() {
+
+  //Getting the prototype
+  let prototype = $collectionHolderII.data('prototype');
+
+  //get the index
+  let index = $collectionHolderII.data('index');
+
+  //create the form
+  let newForm = prototype;
+
+  newForm = newForm.replace(/__name__/g, index);
+
+  //increment the index
+  $collectionHolder.data('index', index + 1);
+
+  //create the panel
+
+  let $panel = $('<div class="panel-heading"></div>');
+
+  //create the panel body & append the form to it
+
+  let $panelBody = $('<div class="panel-body"></div>').append(newForm);
+
+  //append the panel-body to the panel
+  $panel.append($panelBody);
+
+  //Append the removeButton to the new panel
+  addRemoveButton($panel);
+
+  //Append the panel to the addNewMission
+  $addNewMission.before($panel);
+};
+
+
+//Remove
+
+function addRemoveButton($panel) {
+
+  //create remove button
+  let $removeButton = $('<a href="#" class="btn btn-danger"> Remove</a>');
+
+  //appending the remove button to the panel footer
+  let $panelFooter = $('<div class="panel-footer"></div>').append($removeButton)
+
+  //Handle click event
+
+  $removeButton.click(function (e) {
+    e.preventDefault();
+    $(e.target).parents('.panel').slideUp(1000, function () {
+      $(this).remove();
+    });
+
+  });
+
+  //append the footer to the panel
+
+  $panel.append($panelFooter);
+}
+

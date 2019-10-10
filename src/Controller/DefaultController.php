@@ -1,28 +1,30 @@
 <?php
 namespace App\Controller;
+use App\Entity\Job;
+use App\Entity\About;
+use App\Entity\Chiffre;
 use App\Entity\Contact;
 use App\Entity\Project;
 use App\Entity\Category;
 use App\Entity\Employee;
 use App\Entity\Education;
+use App\Form\JobFormType;
+use App\Entity\JobMission;
+use App\Entity\JobProfile;
+use App\Form\AboutFormType;
+use App\Form\ChiffreFormType;
 use App\Form\ContactFormType;
 use App\Form\ProjectFormType;
-use App\Form\RunawayFormType;
 use App\Form\CategoryFormType;
 use App\Form\EmployeeFormType;
+use App\Form\CategoryEditFormType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 class DefaultController extends AbstractController{
-
-     public function projects(){
-
-        return $this->render(
-            'Default/projects.html.twig'
-        );
-    }
 
     public function contact(Request $request, \Swift_Mailer $mailer){
 
@@ -85,15 +87,41 @@ class DefaultController extends AbstractController{
     
     public function index(){
 
+        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
+
         return $this->render(
-            'Default/index.html.twig'
+            'Default/index.html.twig',
+            [
+                'categories' => $categories
+            ]
+        );
+    }
+
+    public function projects(){
+
+        $categories = $this->getDoctrine()->getManager()->getRepository(Category::class)->findAll();
+
+        return $this->render(
+            'Default/projects.html.twig',
+            [
+                'categories' => $categories
+            ]
         );
     }
 
      public function agency(){
 
+        $agency = $this->getDoctrine()->getManager()->getRepository(About::class)->findOneById('7761474e-e9c6-11e9-9507-dc72a4df73a1');
+
+        $chiffres = $this->getDoctrine()->getManager()->getRepository(Chiffre::class)->findAll();
+
+
         return $this->render(
-            'Default/agency.html.twig'
+            'Default/agency.html.twig',
+            [
+                'agency' => $agency,
+                'chiffres' => $chiffres
+            ]
         );
     }
 
@@ -105,17 +133,27 @@ class DefaultController extends AbstractController{
     }
 
 
-    public function project(){
+    public function project(Project $project, Request $request){
+
+        $projet = $this->getDoctrine()->getManager()->getRepository(Project::class)->findOneById($project->getId());
 
         return $this->render(
-            'Default/project.html.twig'
+            'Default/project.html.twig',
+            [
+                'project' => $project
+            ]
         );
     }
 
     public function jobs(){
 
+        $jobs = $this->getDoctrine()->getManager()->getRepository(Job::class)->findAll();
+
         return $this->render(
-            'Default/jobs.html.twig'
+            'Default/jobs.html.twig',
+            [
+                'jobs' => $jobs
+            ]
         );
     }
 
@@ -238,6 +276,66 @@ class DefaultController extends AbstractController{
 
          $employees = $this->getDoctrine()->getManager()->getRepository(Employee::class)->findAll();
 
+        /** 
+         * Create & get jobs
+         */
+        
+        $job = new Job();
+
+        $jobProfile = new JobProfile();
+
+        $job->addProfil($jobProfile);
+
+        $jobMission = new JobMission();
+
+        $job->addMission($jobMission);
+
+
+        $jobForm = $this->createForm(JobFormType::class, $job, ['standalone' => true]);
+
+        $jobForm->handleRequest($request);
+
+        if ($jobForm->isSubmitted() && $jobForm->isValid()) { 
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($job);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("dashboard");
+        }
+
+         $jobs = $this->getDoctrine()->getManager()->getRepository(Job::class)->findAll();
+
+        /** 
+         * Get & edit about
+         */
+
+        $about = $this->getDoctrine()->getManager()->getRepository(About::class)->findOneById('7761474e-e9c6-11e9-9507-dc72a4df73a1');
+
+         $aboutEditForm = $this->createForm(AboutFormType::class, $about, 
+        [
+            'standalone' => true,
+        ]);
+
+        $aboutEditForm->handleRequest($request);
+
+        if ($aboutEditForm->isSubmitted() && $aboutEditForm->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($about);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('dashboard');
+
+        };
+
+        /** 
+         * Get & edit chiffres clés
+         */
+
+        $chiffres = $this->getDoctrine()->getManager()->getRepository(Chiffre::class)->findAll();
+
+
         return $this->render(
         'App/dashboard.html.twig',
          
@@ -248,6 +346,11 @@ class DefaultController extends AbstractController{
                 'projectForm' => $projectForm->createView(),
                 'employees' => $employees,
                 'employeeForm' => $employeeForm->createView(),
+                'jobs' => $jobs,
+                'jobForm' => $jobForm->createView(),
+                'about' => $about,
+                'aboutEditForm' => $aboutEditForm->createView(),
+                'chiffres' => $chiffres,
                 
             ]
         );
@@ -284,7 +387,7 @@ class DefaultController extends AbstractController{
 
     public function categoryEdit(Category $category, Request $request){ 
 
-        $categoryEditForm = $this->createForm(RunawayFormType::class, $category, 
+        $categoryEditForm = $this->createForm(CategoryEditFormType::class, $category, 
         [
             'standalone' => true,
             'category' => $category
@@ -306,6 +409,35 @@ class DefaultController extends AbstractController{
             'App/editCategory.html.twig', [
                 
                 'categoryEditForm' => $categoryEditForm->createView(),
+
+            ]
+        );
+
+    }
+
+    public function chiffreEdit(Chiffre $chiffre, Request $request){ 
+
+        $chiffreEditForm = $this->createForm(ChiffreFormType::class, $chiffre, 
+        [
+            'standalone' => true,
+        ]);
+
+        $chiffreEditForm->handleRequest($request);
+
+        if ($chiffreEditForm->isSubmitted() && $chiffreEditForm->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($chiffre);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('dashboard');
+
+        };
+
+        return $this->render(
+            'App/editChiffre.html.twig', [
+                
+                'chiffreEditForm' => $chiffreEditForm->createView(),
 
             ]
         );

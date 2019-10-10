@@ -1,14 +1,14 @@
 <!--===============================================-->
 <!--    Fancynav-->
 <!--===============================================-->
-<nav class="fancynavbar"
+<nav class="fancynavbar pb-2 pb-lg-3"
   data-zanim-lg='{"from":{"opacity":1,"x":70},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.3}'
   data-zanim-xs='{"from":{"opacity":1,"y":-48},"to":{"opacity":1,"y":0},"ease":"CubicBezier","duration":0.8,"delay":0.3}'
   data-zanim-trigger="scroll" data-exclusive="true">
 
   <div class=" container fancynavbar-togglerbar pr-0" data-onscroll-fade-in="true">
     <a class="fancynavbar-brand ml-xs-2 pt-3 text-black text-uppercase pl-0" href="{{ path('index')}}">
-      <img class="fancynavbar-brand-img" src="assets/img/logo/moreno-logo.png" alt="" width="220"
+      <img class="fancynavbar-brand-img" src="{{asset('assets/img/logo/moreno-logo.png')}}" alt="" width="220"
         data-zanim-lg='{"from":{"opacity":0,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.4}'
         data-zanim-trigger="scroll" />
     </a>
@@ -16,7 +16,7 @@
     <div class="fancynavbar-toggler">
       <svg class="fancynavbar-toggler-icon" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg"
         data-zanim-lg='{"from":{"opacity":0,"x":45},"to":{"opacity":1,"x":0},"ease":"CubicBezier","duration":0.8,"delay":0.5}'
-        data-zanim-trigger="scroll">
+        data-zanim-trigger="scroll" style="margin-right: -6px;padding-bottom:.5rem;margin-top: -.3rem;">
         <path id="path-top" d="M20,25c0,0,22,0,30,0c16,0,18.89,40.71-.15,21.75C38.7,35.65,19.9,16.8,19.9,16.8"></path>
         <path id="path-middle" d="M20,32h30"></path>
         <path id="path-bottom" d="M19.9,46.98c0,0,18.8-18.85,29.95-29.95C68.89-1.92,66,38.78,50,38.78c-8,0-30,0-30,0">
@@ -38,7 +38,10 @@
       <li class="fancynav-item">
         <a class="fancynav-link" href="{{ path('index') }}"><span class="fancynavbar-toggler fancynav-link-content">
 
-            M
+
+
+            <img class="fancynavbar-toggler fancynav-link-content" src="assets/img/moreno.svg">
+
           </span>
         </a>
       </li>

@@ -13,7 +13,7 @@ projects:
 
 
 project:
-  path:     /project
+  path:     /projects/{id}
   controller: App\Controller\DefaultController::project
 
 press:
@@ -59,3 +59,7 @@ projectEdit:
 categoryEdit:
   path:     /dashboard/category/{id}
   controller: App\Controller\DefaultController::categoryEdit
+
+chiffreEdit:
+  path:     /dashboard/chiffres/{id}
+  controller: App\Controller\DefaultController::chiffreEdit

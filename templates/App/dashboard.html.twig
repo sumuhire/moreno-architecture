@@ -34,6 +34,36 @@
       Employees
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" id="jobs-tab" href="#jobs" role="tab" aria-controls="jobs"
+      aria-selected="true">
+      Jobs
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" id="about-tab" href="#about" role="tab" aria-controls="about"
+      aria-selected="true">
+      A propos
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" id="chiffres-tab" href="#chiffres" role="tab" aria-controls="chiffres"
+      aria-selected="true">
+      Chiffres clés
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" id="publication-tab" href="#publication" role="tab"
+      aria-controls="publication" aria-selected="true">
+      Publication
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" id="recompense-tab" href="#recompense" role="tab" aria-controls="recompense"
+      aria-selected="true">
+      Récompense
+    </a>
+  </li>
 </ul>
 
 <hr style='margin-top: -1rem;'>
@@ -75,7 +105,7 @@
         <div class="col-md-6 pt-3" data-toggle="tooltip" title="{{ category.label | capitalize }}">
 
           {# Item #}
-          <a href="{{ path('acceuil') }}" target="_blank" class="card border-0 mb-3 mb-md-0"
+          <a href="{{ path('categoryEdit', { id: category.getId() }) }}" class="card border-0 mb-3 mb-md-0"
             style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
 
             {# Image #}
@@ -157,7 +187,7 @@
         <div class="col-md-6 pt-3" data-toggle="tooltip" title="{{ project.label | capitalize }}">
 
           {# Item #}
-          <a href="" target="_blank" class="card border-0 mb-3 mb-md-0"
+          <a href="{{ path('projectEdit', { id: project.getId() }) }}" class="card border-0 mb-3 mb-md-0"
             style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
             <div class="card card-team">
               {# Image #}
@@ -167,7 +197,9 @@
                     src="{{ asset('assets/img/projects/' ~ project.photo1) }} " />
                 </div>
                 <div class="card-title">
-                  <h5 class="font-weight-bold" data-filter-by="text">{{ project.label | capitalize }}</h5>
+                  <h4 class="font-weight-bold" data-filter-by="text">{{ project.label | title }}</h4>
+                  <h6 class="font-weight-light" data-filter-by="text">
+                    {{ project.category.label | upper }}</h6>
                   <h6 data-filter-by="text">
                     {% if project.intro|length > 40 %}
                     {% set introduction = project.intro|slice(0, 40) %}
@@ -255,12 +287,14 @@
               {# Image #}
               <div class="card-body overflow-hidden" data-filter-by="text">
                 <div class="dropdown card-options">
-                  {# <img class="img-dashboard" data-filter-by="alt"
-                    src="{{ asset('assets/img/employees/' ~ employee.photo1) }} " /> #}
+                  <img class="avatar-lg" data-filter-by="alt"
+                    src="{{ asset('assets/img/employees/' ~ employee.picture) }} " />
                 </div>
                 <div class="card-title">
-                  <h5 class="font-weight-bold" data-filter-by="text">
-                    {{ employee.firstname | capitalize }}{{ employee.lastname | capitalize }}</h5>
+                  <h4 class="font-weight-bold" data-filter-by="text">
+                    {{ employee.firstname | capitalize }} {{ employee.lastname | capitalize }}</h4>
+                  <h6 class="font-weight-light" data-filter-by="text">
+                    {{ employee.job | upper }}</h6>
                   <h6 data-filter-by="text">
                     {% if employee.intro|length > 40 %}
                     {% set introduction = employee.intro|slice(0, 40) %}
@@ -279,20 +313,6 @@
         {% endfor %}
         <div class="modal fade" id="employee_form_modal" tabindex="-1" role="dialog"
           aria-labelledby="employee_form_modal">
-          <ul class="nav pt-2">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" id="general-tab" href="#general" role="tab"
-                aria-controls="general" aria-selected="true">
-                General
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" id="experiences-tab" href="#experiences" role="tab"
-                aria-controls="experiences" aria-selected="true">
-                Education & Experiences
-              </a>
-            </li>
-          </ul>
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -381,9 +401,673 @@
 
 
     </div>
+  </div>
+  <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="jobs">
+    <div class="content-list" data-filter-list="content-list-body">
+      <div class="row content-list-head">
+        <div class="card-list-head d-flex justify-content-between mb-3" style="width:100%">
+          <div class="d-flex align-items-center ">
+            <form class="col-md-auto">
+              <div class="input-group input-group-round">
+                <div class="input-group-prepend" style='height:35px!important;'>
+                  <span class="input-group-text bg-white" style="height:35px">
+                    <i class="material-icons mr-2">filter_list</i>
+                  </span>
+                </div>
+                <input type="search" class="form-control filter-list-input bg-white" placeholder="Filter"
+                  aria-label="Filter notes" style='height:35px!important;'>
+              </div>
+            </form>
 
-    {% endblock %}
+          </div>
+          <div class="d-flex align-items-center">
+            <a class='text-secondary wiggle' id="job_form" alt='Invite Graduates' data-toggle="modal"
+              data-target="#job_form_modal" title="Create job" href=''>
 
-    {% block footer %}
+              <i class="fas fa-plus-square h3 text-secondary"></i>
 
-    {% endblock %}
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="content-list-body row">
+
+        {% for job in jobs %}
+        <div class="col-md-6 pt-3" data-toggle="tooltip" title="">
+
+          {# Item #}
+          <a href="" target="_blank" class="card border-0 mb-3 mb-md-0"
+            style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
+            <div class="card card-team">
+              {# Image #}
+              <div class="card-body overflow-hidden" data-filter-by="text">
+                <div class="dropdown card-options">
+                  <img class="img-dashboard" data-filter-by="alt" src="{{ asset('assets/img/logo/m.png') }} " />
+                </div>
+                <div class="card-title">
+                  <h4 class="font-weight-bold" data-filter-by="text">
+                    {{ job.label | capitalize }}</h4>
+                  <h6 class="font-weight-light" data-filter-by="text">
+                    {{ job.type | upper }}</h6>
+                  <h6 data-filter-by="text">
+                    {% if job.intro|length > 40 %}
+                    {% set introduction = job.intro|slice(0, 40) %}
+                    {% set introduction  = introduction ~ '...' %}
+                    {% else %}
+                    {% set introduction  = job.intro %}
+                    {% endif %}
+                    {{ introduction | capitalize }}</h6>
+                </div>
+              </div>
+            </div>
+
+          </a> {# / .card #}
+
+        </div>
+        {% endfor %}
+        <div class="modal fade" id="job_form_modal" tabindex="-1" role="dialog" aria-labelledby="job_form_modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <i class="fas fa-times" data-dismiss="modal"></i>
+                <ul class="nav pt-2">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" id="jobgeneral-tab" href="#jobgeneral" role="tab"
+                      aria-controls="jobgeneral" aria-selected="true">
+                      General
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" id="profil-tab" href="#profil" role="tab"
+                      aria-controls="profil" aria-selected="true">
+                      Profils & Missions
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+
+                <div class="tab-pane fade active show" id="jobgeneral" role="tabpanel" aria-labelledby="jobgeneral">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+                          {{ form_start(jobForm) }}
+                          {{ form_row(jobForm.label) }}
+                          {{ form_row(jobForm.intro) }}
+                          {{ form_row(jobForm.type) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="profil" role="tabpanel" aria-labelledby="profil">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+
+
+                          <div class='col-sm-12 col-sm-offset-2' id='profils_list'
+                            data-prototype='{{ form_widget(jobForm.profils.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.profils %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.profils) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                                {# {{ form_row(degreeTypeForm.delete) }} #}
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                          <div class='col-sm-12 col-sm-offset-2' id='missions_list'
+                            data-prototype='{{ form_widget(jobForm.missions.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.missions %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.missions) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                                {# {{ form_row(degreeTypeForm.delete) }} #}
+                              </div>
+                            </div>
+                            {% endfor %}
+
+
+                          </div>
+
+                          {{ form_end(jobForm) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about">
+    <div class="content-list" data-filter-list="content-list-body">
+      <div class="content-list-body row">
+        <div class="col-12">
+          {{ form(aboutEditForm)}}
+        </div>
+
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <div class="tab-pane fade" id="publication" role="tabpanel" aria-labelledby="publication">
+    <div class="content-list" data-filter-list="content-list-body">
+      <div class="row content-list-head">
+        <div class="card-list-head d-flex justify-content-between mb-3" style="width:100%">
+          <div class="d-flex align-items-center ">
+            <form class="col-md-auto">
+              <div class="input-group input-group-round">
+                <div class="input-group-prepend" style='height:35px!important;'>
+                  <span class="input-group-text bg-white" style="height:35px">
+                    <i class="material-icons mr-2">filter_list</i>
+                  </span>
+                </div>
+                <input type="search" class="form-control filter-list-input bg-white" placeholder="Filter"
+                  aria-label="Filter notes" style='height:35px!important;'>
+              </div>
+            </form>
+
+          </div>
+          <div class="d-flex align-items-center">
+            <a class='text-secondary wiggle' id="job_form" alt='Invite Graduates' data-toggle="modal"
+              data-target="#job_form_modal" title="Create job" href=''>
+
+              <i class="fas fa-plus-square h3 text-secondary"></i>
+
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="content-list-body row">
+
+        {% for job in jobs %}
+        <div class="col-md-6 pt-3" data-toggle="tooltip" title="">
+
+          {# Item #}
+          <a href="" target="_blank" class="card border-0 mb-3 mb-md-0"
+            style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
+            <div class="card card-team">
+              {# Image #}
+              <div class="card-body overflow-hidden" data-filter-by="text">
+                <div class="dropdown card-options">
+                  <img class="img-dashboard" data-filter-by="alt" src="{{ asset('assets/img/logo/m.png') }} " />
+                </div>
+                <div class="card-title">
+                  <h4 class="font-weight-bold" data-filter-by="text">
+                    {{ job.label | capitalize }}</h4>
+                  <h6 class="font-weight-light" data-filter-by="text">
+                    {{ job.type | upper }}</h6>
+                  <h6 data-filter-by="text">
+                    {% if job.intro|length > 40 %}
+                    {% set introduction = job.intro|slice(0, 40) %}
+                    {% set introduction  = introduction ~ '...' %}
+                    {% else %}
+                    {% set introduction  = job.intro %}
+                    {% endif %}
+                    {{ introduction | capitalize }}</h6>
+                </div>
+              </div>
+            </div>
+
+          </a> {# / .card #}
+
+        </div>
+        {% endfor %}
+        <div class="modal fade" id="job_form_modal" tabindex="-1" role="dialog" aria-labelledby="job_form_modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <i class="fas fa-times" data-dismiss="modal"></i>
+                <ul class="nav pt-2">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" id="jobgeneral-tab" href="#jobgeneral" role="tab"
+                      aria-controls="jobgeneral" aria-selected="true">
+                      General
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" id="profil-tab" href="#profil" role="tab"
+                      aria-controls="profil" aria-selected="true">
+                      Profils & Missions
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+
+                <div class="tab-pane fade active show" id="jobgeneral" role="tabpanel" aria-labelledby="jobgeneral">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+                          {{ form_start(jobForm) }}
+                          {{ form_row(jobForm.label) }}
+                          {{ form_row(jobForm.intro) }}
+                          {{ form_row(jobForm.type) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="profil" role="tabpanel" aria-labelledby="profil">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+
+
+                          <div class='col-sm-12 col-sm-offset-2' id='profils_list'
+                            data-prototype='{{ form_widget(jobForm.profils.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.profils %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.profils) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                                {# {{ form_row(degreeTypeForm.delete) }} #}
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                          <div class='col-sm-12 col-sm-offset-2' id='missions_list'
+                            data-prototype='{{ form_widget(jobForm.missions.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.missions %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.missions) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                                {# {{ form_row(degreeTypeForm.delete) }} #}
+                              </div>
+                            </div>
+                            {% endfor %}
+
+
+                          </div>
+
+                          {{ form_end(jobForm) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <div class="tab-pane fade" id="recompense" role="tabpanel" aria-labelledby="recompense">
+    <div class="content-list" data-filter-list="content-list-body">
+      <div class="row content-list-head">
+        <div class="card-list-head d-flex justify-content-between mb-3" style="width:100%">
+          <div class="d-flex align-items-center ">
+            <form class="col-md-auto">
+              <div class="input-group input-group-round">
+                <div class="input-group-prepend" style='height:35px!important;'>
+                  <span class="input-group-text bg-white" style="height:35px">
+                    <i class="material-icons mr-2">filter_list</i>
+                  </span>
+                </div>
+                <input type="search" class="form-control filter-list-input bg-white" placeholder="Filter"
+                  aria-label="Filter notes" style='height:35px!important;'>
+              </div>
+            </form>
+
+          </div>
+          <div class="d-flex align-items-center">
+            <a class='text-secondary wiggle' id="job_form" alt='Invite Graduates' data-toggle="modal"
+              data-target="#job_form_modal" title="Create job" href=''>
+
+              <i class="fas fa-plus-square h3 text-secondary"></i>
+
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="content-list-body row">
+
+        {% for job in jobs %}
+        <div class="col-md-6 pt-3" data-toggle="tooltip" title="">
+
+          {# Item #}
+          <a href="" class="card border-0 mb-3 mb-md-0" style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
+            <div class="card card-team">
+              {# Image #}
+              <div class="card-body overflow-hidden" data-filter-by="text">
+                <div class="dropdown card-options">
+                  <img class="img-dashboard" data-filter-by="alt" src="{{ asset('assets/img/logo/m.png') }} " />
+                </div>
+                <div class="card-title">
+                  <h4 class="font-weight-bold" data-filter-by="text">
+                    {{ job.label | capitalize }}</h4>
+                  <h6 class="font-weight-light" data-filter-by="text">
+                    {{ job.type | upper }}</h6>
+                  <h6 data-filter-by="text">
+                    {% if job.intro|length > 40 %}
+                    {% set introduction = job.intro|slice(0, 40) %}
+                    {% set introduction  = introduction ~ '...' %}
+                    {% else %}
+                    {% set introduction  = job.intro %}
+                    {% endif %}
+                    {{ introduction | capitalize }}</h6>
+                </div>
+              </div>
+            </div>
+
+          </a> {# / .card #}
+
+        </div>
+        {% endfor %}
+        <div class="modal fade" id="job_form_modal" tabindex="-1" role="dialog" aria-labelledby="job_form_modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <i class="fas fa-times" data-dismiss="modal"></i>
+                <ul class="nav pt-2">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" id="jobgeneral-tab" href="#jobgeneral" role="tab"
+                      aria-controls="jobgeneral" aria-selected="true">
+                      General
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" id="profil-tab" href="#profil" role="tab"
+                      aria-controls="profil" aria-selected="true">
+                      Profils & Missions
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+
+                <div class="tab-pane fade active show" id="jobgeneral" role="tabpanel" aria-labelledby="jobgeneral">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+                          {{ form_start(jobForm) }}
+                          {{ form_row(jobForm.label) }}
+                          {{ form_row(jobForm.intro) }}
+                          {{ form_row(jobForm.type) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="profil" role="tabpanel" aria-labelledby="profil">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+
+
+                          <div class='col-sm-12 col-sm-offset-2' id='profils_list'
+                            data-prototype='{{ form_widget(jobForm.profils.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.profils %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.profils) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                                {# {{ form_row(degreeTypeForm.delete) }} #}
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                          <div class='col-sm-12 col-sm-offset-2' id='missions_list'
+                            data-prototype='{{ form_widget(jobForm.missions.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.missions %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.missions) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                                {# {{ form_row(degreeTypeForm.delete) }} #}
+                              </div>
+                            </div>
+                            {% endfor %}
+
+
+                          </div>
+
+                          {{ form_end(jobForm) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <div class="tab-pane fade" id="chiffres" role="tabpanel" aria-labelledby="chiffres">
+    <div class="content-list" data-filter-list="content-list-body">
+      {# <div class="row content-list-head">
+        <div class="card-list-head d-flex justify-content-between mb-3" style="width:100%">
+          <div class="d-flex align-items-center ">
+            <form class="col-md-auto">
+              <div class="input-group input-group-round">
+                <div class="input-group-prepend" style='height:35px!important;'>
+                  <span class="input-group-text bg-white" style="height:35px">
+                    <i class="material-icons mr-2">filter_list</i>
+                  </span>
+                </div>
+                <input type="search" class="form-control filter-list-input bg-white" placeholder="Filter"
+                  aria-label="Filter notes" style='height:35px!important;'>
+              </div>
+            </form>
+
+          </div>
+          <div class="d-flex align-items-center">
+            <a class='text-secondary wiggle' id="job_form" alt='Invite Graduates' data-toggle="modal"
+              data-target="#job_form_modal" title="Create job" href=''>
+
+              <i class="fas fa-plus-square h3 text-secondary"></i>
+
+            </a>
+          </div>
+        </div>
+      </div> #}
+      <div class="content-list-body row">
+
+        {% for chiffre in chiffres %}
+        <div class="col-md-6 pt-3" data-toggle="tooltip" title="">
+
+          {# Item #}
+          <a href="{{ path('chiffreEdit', { id: chiffre.getId() }) }}" target="_blank"
+            class="card border-0 mb-3 mb-md-0" style='box-shadow:0 1px 4px 0 rgba(93,93,93,.38);'>
+            <div class="card card-team">
+              {# Image #}
+              <div class="card-body overflow-hidden" data-filter-by="text">
+                <div class="dropdown card-options">
+                  <img class="img-dashboard" data-filter-by="alt" src="{{ asset('assets/img/logo/m.png') }} " />
+                </div>
+                <div class="card-title">
+                  <h4 class="font-weight-bold" data-filter-by="text">
+                    {{ chiffre.chiffre | title }}</h4>
+                  <h6 class="font-weight-light" data-filter-by="text">
+                    {{ chiffre.label | title }}</h6>
+
+                </div>
+              </div>
+            </div>
+
+          </a> {# / .card #}
+
+        </div>
+        {% endfor %}
+        {# <div class="modal fade" id="job_form_modal" tabindex="-1" role="dialog" aria-labelledby="job_form_modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <i class="fas fa-times" data-dismiss="modal"></i>
+                <ul class="nav pt-2">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" id="jobgeneral-tab" href="#jobgeneral" role="tab"
+                      aria-controls="jobgeneral" aria-selected="true">
+                      General
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" id="profil-tab" href="#profil" role="tab"
+                      aria-controls="profil" aria-selected="true">
+                      Profils & Missions
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+
+                <div class="tab-pane fade active show" id="jobgeneral" role="tabpanel" aria-labelledby="jobgeneral">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+                          {{ form_start(jobForm) }}
+                          {{ form_row(jobForm.label) }}
+                          {{ form_row(jobForm.intro) }}
+                          {{ form_row(jobForm.type) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="profil" role="tabpanel" aria-labelledby="profil">
+                  <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <div class="row no-gutters py-4">
+
+                        <div class="col">
+
+
+                          <div class='col-sm-12 col-sm-offset-2' id='profils_list'
+                            data-prototype='{{ form_widget(jobForm.profils.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.profils %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.profils) }}
+                              </div>
+                              <div class='text-center' id="panel">
+
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                          <div class='col-sm-12 col-sm-offset-2' id='missions_list'
+                            data-prototype='{{ form_widget(jobForm.missions.vars.prototype)|e("html_attr") }}'>
+                            {% for row in jobForm.missions %}
+
+                            <div class='panel panel-warning'>
+                              <div class='panel-heading'>
+                              </div>
+                              <div class='panel-body'>
+                                {{ form_row(jobForm.missions) }}
+                              </div>
+                              <div class='text-center' id="panel">
+                            
+                              </div>
+                            </div>
+                            {% endfor %}
+
+
+                          </div>
+
+                          {{ form_end(jobForm) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> #}
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+  {% endblock %} {% block footer %} {% endblock %}

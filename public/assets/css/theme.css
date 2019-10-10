@@ -3166,8 +3166,11 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-dark {
-  color: #3d3635;
+  color: #3d3635!important;
   border-color: #3d3635;
+  background-color: transparent!important;
+  font-size: 0.5rem!important;
+  padding: 0.5rem 2rem;
 }
 
 .btn-outline-dark:hover {
@@ -12461,9 +12464,16 @@ a.text-dark:hover, a.text-dark:focus {
   -o-object-fit: cover;
   object-fit: cover;
   border-radius: 50%;
-  /*-----------------------------------------------
-  |   Egg shaped avatar
-  -----------------------------------------------*/
+
+}
+
+.avatar-lg {
+  width: 4.25rem;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 50%;
+
 }
 
 .avatar.avatar-egg {
@@ -16133,7 +16143,7 @@ button.bg-white:focus {
 }
 
 .text-small {
-  font-size: .7rem!important;
+  font-size: .8rem!important;
 }
 
 /*-----------------------------------------------

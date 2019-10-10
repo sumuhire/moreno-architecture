@@ -96,13 +96,18 @@ class Project
      */
     private $Activities;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo6;
+
     public function __construct()
     {
         $this->projectManager = new ArrayCollection();
         $this->Activities = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -299,6 +304,18 @@ class Project
         if ($this->Activities->contains($activity)) {
             $this->Activities->removeElement($activity);
         }
+
+        return $this;
+    }
+
+    public function getPhoto6(): ?string
+    {
+        return $this->photo6;
+    }
+
+    public function setPhoto6(?string $photo6): self
+    {
+        $this->photo6 = $photo6;
 
         return $this;
     }

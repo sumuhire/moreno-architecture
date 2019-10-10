@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nimble{% endblock %}
+
+{% block header %}
+
+{% include 'App/headerSide.html.twig' %}
+
+{% endblock %}
+
+{% block body %}
+
+{% include 'App/subHeader.html.twig' %}
+<div class="container">
+    <div class="col-12">
+        {{ form(chiffreEditForm)}}
+    </div>
+</div>
+
+{# <div class="col-lg-6 bg-white py-6">
+    <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-sm-8 col-md-6 col-lg-10 col-xl-8 text-center"
+            data-zanim-xs='{"delay":0.5,"animation":"slide-left"}' data-zanim-trigger="scroll">
+            <h3 class='mb-4'>
+                <i class="fal fa-check-square" width="15" data-zanim-xs='{"delay":0.1,"animation":"zoom-in"}'
+                    style="color:#ffc107;"></i>
+            </h3>
+            <a href="{{path('index')}}" style="margin-right: -1rem;">
+                <img src="{{ asset('assets/img/logo/nimble-beta.png')}}" alt="" width="180"
+                    data-zanim-xs='{"delay":0.1,"animation":"zoom-in"}' />
+            </a>
+            <h4 class="font-weight-light text-uppercase text-center mt-4 mb-4" data-toggle="animation"
+                data-animation="fadeUp" data-animation-order="2" data-animation-trigger="load">
+                Welcome to Nimble!
+            </h4>
+            {{ form_start(categoryEditForm) }}
+            <div class="row mb-4">
+                <div class="col">
+                    {{ form_row(categoryEditForm.label) }}
+                </div>
+                <div class="col">
+                    {{ form_row(categoryEditForm.intro) }}
+                </div>
+            </div>
+            <div class="row mb-2 ">
+                <div class="col">
+                    {{ form_row(categoryEditForm.submit) }}
+                </div>
+            </div>
+
+
+            {{ form_end(categoryEditForm) }}
+        </div>
+    </div>
+</div> #}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

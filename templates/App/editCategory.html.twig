@@ -11,14 +11,11 @@
 {% block body %}
 
 {% include 'App/subHeader.html.twig' %}
-{{ form_start(categoryEditForm)}}
-<div class="col-12 col-md-6">
-    {{ form_row(categoryEditForm)}}
-</div>
-<div class="col-12 col-md-6">
+
+<div class="col-12">
     {{ form(categoryEditForm)}}
 </div>
-{{ form_end(categoryEditForm)}}
+
 
 {# <div class="col-lg-6 bg-white py-6">
     <div class="row h-100 align-items-center justify-content-center">
@@ -56,5 +53,9 @@
         </div>
     </div>
 </div> #}
+
+{% endblock %}
+
+{% block footer %}
 
 {% endblock %}

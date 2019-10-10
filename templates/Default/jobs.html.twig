@@ -37,47 +37,50 @@
         <div class="col-lg-7 text-center">
           <h1 class="mb-3 fs-2 fs-sm-4 font-weight-light">Jobs</h1>
         </div>
-        <div class="ui styled fluid accordion text-center" style="border:none;padding-right: 15px;padding-left: 15px;"
+        <div class="ui styled fluid accordion" style="border:none;padding-right: 15px;padding-left: 15px;"
           data-options="{&quot;exclusive&quot;:false}">
+          {% for job in jobs %}
           <div class="job">
             <div class="title">
 
-              <h3 class="mt-4 mb-2 font-weight-light job">Architecte</h3>
-              <h5 class="mb-3 text-muted">CDD/CDI</h5>
+              <h3 class="mt-4 mb-2 font-weight-light job">{{job.label | capitalize }}</h3>
+              <h5 class="mb-3 text-muted">{{job.type | upper }}</h5>
             </div>
             <div class="content">
               <div class="transition hidden">
-                <div class=" col-12 mb-6 text-center">
-                  <p class="text-small">Nous recherchons dans le cadre de notre expansion pour entrée immédiate:
-                    DESSINATEUR /
-                    PROJETEUR EN BÂTIMENT (m/f)</p>
+                <div class=" col-12 mb-6">
+                  <p class="text-small">{{job.intro | capitalize }}</p>
                   <h4 class="mt-4">Profil</h4>
                   <div class="text-sans-serif">
-                    <p class="text-small">Maîtrise des logiciels 2D et 3D</p>
-                    <p class="text-small">Bon sens de l’organisation, travail en équipe, autonomie, rigueur et
+                    {% for profil in job.profils %}
+                    <p class="text-small">{{profil.label | capitalize }}</p>
+                    {% endfor %}
+                    <p class="text-small">Bon sens de l'organisation, travail en équipe, autonomie, rigueur et
                       flexibilité</p>
-                    <p class="text-small">Maîtrise du français, des connaissances de l’allemand et du
-                      luxembourgeois constituant un atout</p>
-                    <p class="text-small">5 ans d'expérience souhaitée</p>
+                    <p class="text-small">Maîtrise du français, des connaissances de l'allemand et du luxembourgeois
+                      constituent d'un atout</p>
+                    <p class="text-small">3 ans d'expérience souhaitée. Une expérience luxembourgeoise constitue un
+                      atout</p>
                   </div>
                   <h4 class="mt-4">Missions</h4>
                   <div class=" text-sans-serif">
-                    <p class="text-small">Votre mission consiste principalement en l’élaboration de plans, détails
-                      ou de brochures
-                      divers sur des
-                      projets de
-                      toutes tailles au sein d’une équipe jeune et dynamique. Vous serez amené à participer à toutes
-                      les phases
-                      d’un projet</p>
+                    {% for mission in job.missions %}
+                    <p class="text-small">{{mission.label | capitalize }}</p>
+                    {% endfor %}
+                    <p class="text-small">Coordonner les échanges avec les intervenants extérieurs : autorités,
+                      bureaux d'étude et maître d'ouvrage</p>
+                    <p class="text-small">Elaboration de plans, détails, brochures diverses</p>
+
 
 
                   </div>
                   <div class="pl-4 my-6 border-left border-500 border-2x text-small font-weight-small gray-600 lead">
                     <p class="text-small">
-                      Les personnes intéressées sont invitées à adresser leur candidature avec CV, certificats et
+                      Les personnes intéressées sont invitées à adresser leur candidature avec CV, certificats
+                      et
                       références à
                     </p>
-                    <a class="btn btn-danger" href="#">jobs@moreno.lu</a>
+                    <a class="btn btn-danger" href="mailto:jobs@moreno.lu">jobs@moreno.lu</a>
 
                   </div>
                 </div>
@@ -85,98 +88,7 @@
               </div>
             </div>
           </div>
-          <div class="job">
-            <div class="title">
-
-              <h3 class="mt-4 mb-2 font-weight-light job">Architecte</h3>
-              <h5 class="mb-3 text-muted">CDD/CDI</h5>
-            </div>
-            <div class="content">
-              <div class="transition hidden">
-                <div class=" col-12 mb-6 text-center">
-                  <p class="text-small">Nous recherchons dans le cadre de notre expansion pour entrée immédiate:
-                    DESSINATEUR /
-                    PROJETEUR EN BÂTIMENT (m/f)</p>
-                  <h4 class="mt-4">Profil</h4>
-                  <div class="text-sans-serif">
-                    <p class="text-small">Maîtrise des logiciels 2D et 3D</p>
-                    <p class="text-small">Bon sens de l’organisation, travail en équipe, autonomie, rigueur et
-                      flexibilité</p>
-                    <p class="text-small">Maîtrise du français, des connaissances de l’allemand et du
-                      luxembourgeois constituant un atout</p>
-                    <p class="text-small">5 ans d'expérience souhaitée</p>
-                  </div>
-                  <h4 class="mt-4">Missions</h4>
-                  <div class=" text-sans-serif">
-                    <p class="text-small">Votre mission consiste principalement en l’élaboration de plans, détails
-                      ou de brochures
-                      divers sur des
-                      projets de
-                      toutes tailles au sein d’une équipe jeune et dynamique. Vous serez amené à participer à toutes
-                      les phases
-                      d’un projet</p>
-
-
-                  </div>
-                  <div class="pl-4 my-6 border-left border-500 border-2x text-small font-weight-small gray-600 lead">
-                    <p class="text-small">
-                      Les personnes intéressées sont invitées à adresser leur candidature avec CV, certificats et
-                      références à
-                    </p>
-                    <a class="btn btn-danger" href="#">jobs@moreno.lu</a>
-
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="job">
-            <div class="title">
-
-              <h3 class="mt-4 mb-2 font-weight-light job">Architecte</h3>
-              <h5 class="mb-3 text-muted">CDD/CDI</h5>
-            </div>
-            <div class="content">
-              <div class="transition hidden">
-                <div class=" col-12 mb-6 text-center ">
-                  <p class="text-small">Nous recherchons dans le cadre de notre expansion pour entrée immédiate:
-                    DESSINATEUR /
-                    PROJETEUR EN BÂTIMENT (m/f)</p>
-                  <h4 class="mt-4">Profil</h4>
-                  <div class="text-sans-serif">
-                    <p class="text-small">Maîtrise des logiciels 2D et 3D</p>
-                    <p class="text-small">Bon sens de l’organisation, travail en équipe, autonomie, rigueur et
-                      flexibilité</p>
-                    <p class="text-small">Maîtrise du français, des connaissances de l’allemand et du
-                      luxembourgeois constituant un atout</p>
-                    <p class="text-small">5 ans d'expérience souhaitée</p>
-                  </div>
-                  <h4 class="mt-4">Missions</h4>
-                  <div class=" text-sans-serif">
-                    <p class="text-small">Votre mission consiste principalement en l’élaboration de plans, détails
-                      ou de brochures
-                      divers sur des
-                      projets de
-                      toutes tailles au sein d’une équipe jeune et dynamique. Vous serez amené à participer à toutes
-                      les phases
-                      d’un projet</p>
-
-
-                  </div>
-                  <div class="pl-4 my-6 border-left border-500 border-2x text-small font-weight-small gray-600 lead">
-                    <p class="text-small">
-                      Les personnes intéressées sont invitées à adresser leur candidature avec CV, certificats et
-                      références à
-                    </p>
-                    <a class="btn btn-danger" href="#">jobs@moreno.lu</a>
-
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
 
       </div>
